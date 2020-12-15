@@ -8,6 +8,7 @@ import api from "../../services/Api";
 import Utils from "../../services/Utils";
 import moment from "moment";
 import DealChart from "../../Components/DealChart";
+import DealChartLine from "../../Components/DealChartLine";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +26,7 @@ const DashBoard = ({ history }) => {
     const [leadData, setLeadData] = useState(null);
     const [dealData, setDealData] = useState(null);
     const [allDeals, setAllDeals] = useState(null);
+    const [allLeadsLine, setAllLeadsLine] = useState(null);
     const [dealsClosed, setDealsClosed] = useState([{ name: 'Hoje', 'Deals': 0 }, { name: 'Ontem', 'Deals': 0 }, { name: 'Ultimos dias', 'Deals': 0 }]);
     const classes = useStyles();
 
@@ -159,6 +161,36 @@ const DashBoard = ({ history }) => {
                 { name: 'Negociações Iniciadas', 'Deals': 0, days: [{ name: 'Hoje', 'Deals': 0 }, { name: 'Ontem', 'Deals': 0 }, { name: 'Ultimos dias', 'Deals': 0 }] }
             ])
             setAllDeals(allDeals)
+
+            const allLineLeals = await responseLeads.data.data.map(lead => {
+                return {
+                    date: moment(lead['add_time']).format('L'),
+                    value: 1
+                }
+            })
+            let Numvol = 0;
+            console.log(allLineLeals);
+            const reduced = await allLineLeals.reduce(function (object, item) {
+                const date = item.date;
+                if (!object[date]) {
+                    object[date] = { date: date, num: 1 }
+                } else {
+                    object[date] = { date: date, num: object[date].num + 1 }
+                }
+                return object;
+            }, {})
+            let i = 0;
+            var obj = []
+            for (let key in reduced) {
+                console.log(key)
+                obj[i] = {
+                    date: reduced[key].date,
+                    num: reduced[key].num
+                }
+                i = i + 1;
+            }
+            setAllLeadsLine(obj)
+
         };
         callApi()
     }, [])
@@ -213,6 +245,11 @@ const DashBoard = ({ history }) => {
             <Grid container style={{ marginTop: 50 }}>
                 <Grid item xs={12} md={12}  >
                     <DealChart data={allDeals} />
+                </Grid>
+            </Grid>
+            <Grid container style={{ marginTop: 50 }}>
+                <Grid item xs={12} md={12}  >
+                    {allLeadsLine != null && <DealChartLine data={allLeadsLine} />}
                 </Grid>
             </Grid>
         </>
