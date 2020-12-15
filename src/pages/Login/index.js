@@ -4,7 +4,6 @@ import { Container, Logo } from "./styles";
 import TextFieldLogin from "../../Components/TextField";
 import firebase from 'firebase';
 import uuid from 'react-uuid';
-import bcryptjs from 'bcryptjs';
 import { encrypt } from "../../services/Crypt";
 const Login = ({ history }) => {
     const [email, setEmail] = useState('');
