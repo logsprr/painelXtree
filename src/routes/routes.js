@@ -3,7 +3,8 @@ import DashBoard from '../pages/DashBoard/index';
 import Deal from '../pages/Deal/index';
 import Lead from '../pages/Lead/index';
 import Login from '../pages/Login/index';
-import Register from '../pages/Register';
+import Register from '../pages/Register/index';
+import Relatory from '../pages/Relatory/index';
 import PrivateRoute from './PrivateRoute';
 const Routes = () => (
     <BrowserRouter>
@@ -11,7 +12,7 @@ const Routes = () => (
             <PrivateRoute exact path="/" component={DashBoard} />
             <PrivateRoute exact path="/deals" component={Deal} />
             <PrivateRoute exact path="/leads" component={Lead} />
-            <PrivateRoute exact path="/relatory" component={DashBoard} />
+            <PrivateRoute exact path="/relatory" component={Relatory} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path="*" component={() => <h1>Erro 404</h1>} />

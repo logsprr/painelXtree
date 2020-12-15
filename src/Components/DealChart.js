@@ -13,11 +13,15 @@ const DealChart = (props) => {
             <ResponsiveContainer width={'100%'} height={300}>
                 <BarChart
                     data={props.data}
+                    style={{
+                        color: '#ddd'
+                    }}
                     margin={{
                         top: 50, right: 30, left: 20, bottom: 5,
+
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="3 3" style={{ color: 'white' }} />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />

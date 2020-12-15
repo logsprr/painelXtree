@@ -191,7 +191,7 @@ const DashBoard = ({ history }) => {
                     >
                         <MenuItem onClick={() => handleClose('/deals')}>Negócios</MenuItem>
                         <MenuItem onClick={() => handleClose('/leads')}>Leads</MenuItem>
-                        <MenuItem onClick={() => handleClose('/relatorys')}>Relatórios</MenuItem>
+                        <MenuItem onClick={() => handleClose('/relatory')}>Relatórios</MenuItem>
                     </Menu>
                     <Typography variant="h6" className={classes.title}>
                         Novidades
